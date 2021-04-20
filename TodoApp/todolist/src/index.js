@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Head from './components/app-head/head'
+// import Head from './components/app-head/head'
+import Plus from './components/btn/plus';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Head/>
+    {/* <Head/> */}
+    <Plus/>
   </React.StrictMode>,
   document.getElementById('app')
 );
