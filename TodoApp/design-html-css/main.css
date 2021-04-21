@@ -48,16 +48,83 @@ h1 {
 /* conten */
 
 .conten {
-    margin-top: 20px;
+    /* margin-top: 20px;
     width: 100%;
     height: 90%;
     border: 1px solid #95a5a6;
     border-radius: 10px;
+    overflow: auto; */
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid #95a5a6;
+    top: 60px;
+    left: 0px;
     overflow: auto;
+    z-index: -1;
 }
 
 .conten::-webkit-scrollbar {
     width: 5px;
+}
+
+.edit_item{
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid #95a5a6;
+    top: 60px;
+    left: 0px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    position: relative;
+    margin-top: 5px;
+}
+.input >input{
+    border: none;
+    background: none;
+    font-size: 15px;
+    width: 95%;
+    border-bottom: 1px solid #2c3e50;
+    padding: 5px 5px 5px 15px;
+    margin-top: 20px;
+}
+.input>input:focus{
+    outline: none;
+}
+.input>span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    padding-left: 1em;
+    top: 50%;
+    z-index: -1;
+    color: #2c3e50;
+    display: block;
+    transition: 0.3s;
+}
+.focus+span::before {
+    top: -0px;
+}
+
+
+.edit_item>textarea{
+    font-size: 15px;
+    width: 20em;
+    height: 85%;
+    margin: auto;
+    border: none;
+    background: #ecf0f1;
+    padding: 2px 1em;
+    
+}
+
+.edit_item>textarea:focus{
+   outline: none;
 }
 
 .item {
