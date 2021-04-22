@@ -26,26 +26,6 @@ class conten extends Component {
                 {
                     title:"Title",
                     conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
-                },
-                {
-                    title:"Title",
-                    conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
-                },
-                {
-                    title:"Title",
-                    conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
-                },
-                {
-                    title:"Title",
-                    conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
-                },
-                {
-                    title:"Title",
-                    conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
-                },
-                {
-                    title:"Title",
-                    conten:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ullam dolor ad alias nostrum facilis assumenda molestias? Dolore nobis a placeat consequuntur voluptate voluptates illo sed. Quos quis voluptates necessitatibus!"
                 }
             ]
         }
