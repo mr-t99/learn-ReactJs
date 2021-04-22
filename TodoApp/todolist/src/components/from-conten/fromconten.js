@@ -3,28 +3,52 @@ import './from.css';
 import classNames from 'classnames';
 
 function Title(props) {
-    const [value, setValue] =useState('');
-    const getValue = (event)=>{
-        setValue(event.target.value);
+
+    // const isBlur = ()=>{
+    //     console.log(isFocus)
+    //     if(value.trim===""){
+    //         clickInput()
+    //     }
+    // }
+
+    const [state, setState] = useState({
+        value: '',
+        isFocus: false
+    })
+
+    const getValue = (event) => {
+        setState({
+            ...state,
+            value: event.target.value
+        });
     }
 
-    const [isFocus, setIsfocus] = useState(false);
-    const clickInput = () => {
-        setIsfocus(!isFocus)
-    };
-    const isBlur = ()=>{
-        console.log(isFocus)
-        if(value.trim===""){
-            clickInput()
+    const clickInput = (event) => {
+        if (event.type === 'focus') {
+            setState({
+                ...state,
+                isFocus:true
+            })
         }
-    }
+        else {
+            if (event.target.value.trim() === '') {
+                setState({
+                    isFocus: false,
+                    value: ''
+                })
+                return;
+            }
+        }
+    };
+
     return (
         <div className="input">
             <input type="text"
-                className={classNames({ 'focus': isFocus })}
+                className={classNames({ 'focus': state.isFocus })}
                 onFocus={clickInput}
-                onBlur={isBlur}
                 onChange={getValue}
+                onBlur={clickInput}
+                value={state.value}
             ></input>
             <span data-placeholder2="Note title" data-placeholder1="Click here to add a title"></span>
         </div>
