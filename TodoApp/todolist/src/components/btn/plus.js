@@ -3,15 +3,20 @@ import { useSpring, animated } from 'react-spring'
 
 import './plus.css';
 
-function Click() {
+function Click(props) {
     const [state, toggle] = useState(true)
     const { x } = useSpring({
         from: { x: 0 },
         x: state ? 1 : 0,
         config: { duration: 1000 },
     })
+    // console.log(props)
+    
     return (
-        <div className='add-node' onClick={() => toggle(!state)}>
+        <div className='add-node' onClick={() => {
+            toggle(!state);
+            props.clickBtn();
+        }}>
             <animated.div
                 className='plusImg'
                 style={{
@@ -30,7 +35,7 @@ function Click() {
 class plus extends Component {
     render() {
         return (
-            <Click />
+            <Click clickBtn={this.props.onClickBtn}/>
         );
     }
 }

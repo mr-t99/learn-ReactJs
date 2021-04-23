@@ -2,7 +2,8 @@
     position: relative;
     padding: 5px 10px 10px 10px;
     border-radius: 10px;
-    height: 95%;
+    height: 33em;
+    z-index: -1;
 }
 
 .input{

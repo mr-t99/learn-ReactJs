@@ -3,14 +3,6 @@ import './from.css';
 import classNames from 'classnames';
 
 function Title(props) {
-
-    // const isBlur = ()=>{
-    //     console.log(isFocus)
-    //     if(value.trim===""){
-    //         clickInput()
-    //     }
-    // }
-
     const [state, setState] = useState({
         value: '',
         isFocus: false

@@ -6,12 +6,15 @@ import Plus from './components/btn/plus';
 import Conten from './components/conten/conten';
 import Fromconten from './components/from-conten/fromconten';
 
+import App from './App';
+
 ReactDOM.render(
   <React.StrictMode>
-    <Head/>
+    {/* <Head/>
     <Plus/>
-    {/* <Conten/> */}
-    <Fromconten/>
+    <Conten/>
+    <Fromconten/> */}
+    <App/>
   </React.StrictMode>,
   document.getElementById('app')
 );
