@@ -4,17 +4,23 @@ import { useSpring, animated } from 'react-spring'
 import './plus.css';
 
 function Click(props) {
-    const [state, toggle] = useState(true)
+    const [state, setState] = useState({
+        toggle:true,
+        click:true
+    });
     const { x } = useSpring({
         from: { x: 0 },
         x: state ? 1 : 0,
         config: { duration: 1000 },
     })
-    // console.log(props)
-    
+
     return (
+
         <div className='add-node' onClick={() => {
-            toggle(!state);
+            setState({
+                click: !state.click,
+                toggle:!state.toggle
+            });
             props.clickBtn();
         }}>
             <animated.div
@@ -26,7 +32,9 @@ function Click(props) {
                         output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1],
                     }),
                 }}>
-                <img src='/asset/plus.svg' width='25' />
+                {state.click && <img src='/asset/plus.svg' width='25' />}
+                {!state.click && <img src='/asset/left-arrow.svg' width='25' />}
+
             </animated.div>
         </div>
     )
@@ -35,7 +43,7 @@ function Click(props) {
 class plus extends Component {
     render() {
         return (
-            <Click clickBtn={this.props.onClickBtn}/>
+            <Click clickBtn={this.props.onClickBtn} />
         );
     }
 }

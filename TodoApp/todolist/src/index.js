@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Head from './components/app-head/head'
-import Plus from './components/btn/plus';
-import Conten from './components/conten/conten';
-import Fromconten from './components/from-conten/fromconten';
-
 import App from './App';
 
 ReactDOM.render(
