@@ -34,37 +34,39 @@
             <div class="input">
                 <input type="text">
                 <span data-placeholder2="Note title" data-placeholder1="Click here to add a title"></span>
-                
             </div>
             <textarea placeholder="Write the conten here!"></textarea>
+            <img src="./asset/close.svg" width="25px" alt="">
+            <img src="./asset/tick.svg" width="25px" alt="">
         </div>
+
         <div class="add-node">
             <img src="./Asset/plus.svg" class="add-img">
         </div>
     </div>
     <script>
-        $('.txt input').focus(function() {
+        $('.txt input').focus(function () {
             $(this).addClass('focus');
 
         })
 
-        $('.txt input').blur(function() {
+        $('.txt input').blur(function () {
             if ($(this).val === '') {
                 $(this).removeClass('focus')
             }
         })
 
-        $('.add-img').click(function() {
+        $('.add-img').click(function () {
             // $('.app').addClass('click')
             $('.from-add-conten').addClass('click')
         })
 
-        $('.btn div').click(function() {
+        $('.btn div').click(function () {
             // $('.app').removeClass('click')
             $('.from-add-conten').removeClass('click')
         })
 
-        $('.input input').focus(function() {
+        $('.input input').focus(function () {
             $(this).addClass('focus');
 
         })

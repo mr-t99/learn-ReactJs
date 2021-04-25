@@ -70,7 +70,7 @@ h1 {
 }
 
 .edit_item{
-    border: 1px solid steelblue
+    border: 1px solid steelblue;
     position: relative;
     padding: 5px 10px 10px 10px;
     border-radius: 10px;
@@ -129,6 +129,12 @@ h1 {
 
 .edit_item>textarea:focus{
     outline: none;
+}
+
+
+.edit_item .top_from{
+    display: flex;
+    
 }
 /* From input */
 
