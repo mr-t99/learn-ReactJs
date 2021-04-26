@@ -9,7 +9,8 @@ const Item = (props) => {
         viewConten = conten.substr(0, 83) + " ..."
     }
     const pushConten = ()=>{
-        props.onClick(props);
+        props.onClickItem(props);
+        props.onClick();
     }
     return (
         <div className='item' onClick={pushConten}>
@@ -59,7 +60,8 @@ class conten extends Component {
                                 title={item.title}
                                 conten={item.conten}
                                 key={index}
-                                onClick={this.pushConten}
+                                onClickItem={this.pushConten}
+                                onClick = {this.props.onClick}
                             />
                         )
                     })

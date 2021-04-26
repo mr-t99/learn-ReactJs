@@ -54,7 +54,6 @@ function Title(props) {
 class fromconten extends Component {
 
     render() {
-        // console.log(this.props)
         return (
             <div className="edit_item">
                 <Title title={this.props.title} />

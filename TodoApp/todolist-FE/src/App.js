@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, createRef, useState } from 'react';
 import { useTrail, a } from '@react-spring/web'
 import Head from './components/app-head/head';
 import Plusbtn from './components/btn/plus';
@@ -35,13 +35,17 @@ class App extends Component {
                 conten: ''
             }
         }
+
+        this.callonClick = createRef();
+
         this.selectConten = this.selectConten.bind(this);
-        this.changeImgBtn = this.changeImgBtn.bind(this);
+        this.onClickItem = this.onClickItem.bind(this);
+        this.onClickBtn = this.onClickBtn.bind(this);
     }
 
     selectConten(conten) {
         this.setState({
-            clickBtn: !this.state.clickBtn,
+            ...this.state,
             selectConten: {
                 title: conten.title,
                 conten: conten.conten
@@ -49,10 +53,17 @@ class App extends Component {
         })
     }
 
-    changeImgBtn() {
+    onClickItem() {
         this.setState({
             ...this.state,
-            clickBtn: !this.state.clickBtn
+            clickBtn: this.callonClick.current.onClickItem()
+        })
+    }
+
+    onClickBtn(value) {
+        this.setState({
+            ...this.state,
+            clickBtn: value
         })
     }
 
@@ -61,14 +72,20 @@ class App extends Component {
             <>
                 <Head />
                 <Plusbtn
-                    onClickBtn={this.changeImgBtn}
-                    valueBtn = {this.state.clickBtn}
+                    onClick={this.onClick}
+                    exitBtn={this.onClickBtn}
+                    ref={this.callonClick}
                 />
                 {this.state.clickBtn &&
                     <Trail open={true}>
-                        <Conten selectConten={
-                            this.selectConten
-                        } />
+                        <Conten
+                            selectConten={
+                                this.selectConten
+                            }
+                            onClick={this.onClickItem}
+
+                        />
+
                     </Trail>}
                 {!this.state.clickBtn &&
                     <Trail open={true}>
