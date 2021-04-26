@@ -1,13 +1,16 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './from.css';
 import classNames from 'classnames';
 
 function Title(props) {
+    var isFocus = false;
+    if (props.title != '') {
+        isFocus = true
+    }
     const [state, setState] = useState({
-        value: '',
-        isFocus: false
+        value: props.title,
+        isFocus: isFocus
     })
-
     const getValue = (event) => {
         setState({
             ...state,
@@ -19,7 +22,7 @@ function Title(props) {
         if (event.type === 'focus') {
             setState({
                 ...state,
-                isFocus:true
+                isFocus: true
             })
         }
         else {
@@ -51,10 +54,13 @@ function Title(props) {
 class fromconten extends Component {
 
     render() {
+        // console.log(this.props)
         return (
             <div className="edit_item">
-                <Title />
-                <textarea placeholder="Write the conten here!"></textarea>
+                <Title title={this.props.title} />
+                <textarea placeholder="Write the conten here!">
+                    {/* {this.props.conten} */}
+                </textarea>
             </div>
         );
     }

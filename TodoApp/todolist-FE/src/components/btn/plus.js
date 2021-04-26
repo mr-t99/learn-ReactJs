@@ -5,21 +5,20 @@ import './plus.css';
 
 function Click(props) {
     const [state, setState] = useState({
-        toggle:true,
-        click:true
+        toggle: true,
+        click: true
     });
     const { x } = useSpring({
         from: { x: 0 },
         x: state ? 1 : 0,
         config: { duration: 1000 },
     })
-
     return (
 
         <div className='add-node' onClick={() => {
             setState({
                 click: !state.click,
-                toggle:!state.toggle
+                toggle: !state.toggle
             });
             props.clickBtn();
         }}>
@@ -41,9 +40,26 @@ function Click(props) {
 }
 
 class plus extends Component {
+    constructor() {
+        super();
+        this.state={
+            click: true
+        }
+    }
+    componentDidUpdate(){
+        this.setState({
+            click:this.props.valueBtn
+        })
+    }
     render() {
         return (
-            <Click clickBtn={this.props.onClickBtn} />
+            // <Click clickBtn={this.props.onClickBtn} />
+            <div className='add-node' >
+                <div className='plusImg'>
+                    {this.state.click && <img src='/asset/plus.svg' width='25' />}
+                    {!this.state.click && <img src='/asset/left-arrow.svg' width='25' />}
+                </div>
+            </div>
         );
     }
 }

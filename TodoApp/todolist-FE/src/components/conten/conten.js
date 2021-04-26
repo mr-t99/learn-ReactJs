@@ -5,12 +5,14 @@ import './conten.css';
 const Item = (props) => {
     const { title, conten } = props;
     var viewConten = conten;
-    if(conten.length>83){
-        viewConten = conten.substr(0,83)+" ..."
+    if (conten.length > 83) {
+        viewConten = conten.substr(0, 83) + " ..."
     }
-
+    const pushConten = ()=>{
+        props.onClick(props);
+    }
     return (
-        <div className='item'>
+        <div className='item' onClick={pushConten}>
             <h3>{title}</h3>
             <span>
                 {
@@ -36,7 +38,13 @@ class conten extends Component {
                 }
             ]
         }
+        this.pushConten = this.pushConten.bind(this);
     }
+
+    pushConten(conten) {
+        this.props.selectConten(conten)
+    }
+
     render() {
         const { conten } = this.state;
         return (
@@ -46,7 +54,14 @@ class conten extends Component {
                 }
                 {
                     conten.length && conten.map((item, index) => {
-                        return (<Item title={item.title} conten={item.conten} key={index} />)
+                        return (
+                            <Item
+                                title={item.title}
+                                conten={item.conten}
+                                key={index}
+                                onClick={this.pushConten}
+                            />
+                        )
                     })
                 }
             </div>

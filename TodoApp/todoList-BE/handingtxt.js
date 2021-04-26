@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = process.env.DB_PATH;
 const readFile = () => {
     if (!fs.existsSync(path)) {
-        return false;
+        return "Không tìm thấy file";
     } else {
         var data = fs.readFileSync(path,
             { encoding: 'utf8', flag: 'r' });
