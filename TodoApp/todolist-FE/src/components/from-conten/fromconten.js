@@ -35,7 +35,6 @@ function Title(props) {
             }
         }
     };
-
     return (
         <div className="input">
             <input type="text"
@@ -52,12 +51,33 @@ function Title(props) {
 
 
 class fromconten extends Component {
-
+    constructor(){
+        super();
+        this.state={
+            value:''
+        }
+        this.onChange = this.onChange.bind(this);
+    }
+    componentDidMount(){
+        this.setState({
+            value:this.props.conten.conten
+        })
+    }
+    onChange(event){
+        this.setState({
+            value:event.target.value
+        })
+    }
     render() {
         return (
             <div className="edit_item">
-                <Title title={this.props.title} />
-                <textarea placeholder="Write the conten here!">
+                <Title title={this.props.conten.title} />
+                <textarea placeholder="Write the conten here!"
+                    value={this.state.value}
+                    onChange={
+                        this.onChange
+                    }
+                >
                     {/* {this.props.conten} */}
                 </textarea>
             </div>

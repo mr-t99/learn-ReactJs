@@ -37,7 +37,6 @@ class App extends Component {
         }
 
         this.callonClick = createRef();
-
         this.selectConten = this.selectConten.bind(this);
         this.onClickItem = this.onClickItem.bind(this);
         this.onClickBtn = this.onClickBtn.bind(this);
@@ -51,11 +50,12 @@ class App extends Component {
                 conten: conten.conten
             }
         })
+        var  a = this.state
+        
     }
 
     onClickItem() {
         this.setState({
-            ...this.state,
             clickBtn: this.callonClick.current.onClickItem()
         })
     }
@@ -66,7 +66,6 @@ class App extends Component {
             clickBtn: value
         })
     }
-
     render() {
         return (
             <>
@@ -90,8 +89,7 @@ class App extends Component {
                 {!this.state.clickBtn &&
                     <Trail open={true}>
                         <Fromconten
-                            title={this.state.selectConten.title}
-                            conten={this.state.selectConten.conten}
+                            conten={this.state.selectConten}
                         />
                     </Trail>
                 }
