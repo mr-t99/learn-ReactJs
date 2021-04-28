@@ -23,7 +23,7 @@ const addItem = (req, res) => {
         })
         return;
     }
-    
+
     var jsonData = readFile();
     var id = 0;
     if (jsonData.body.length) {
@@ -40,7 +40,7 @@ const addItem = (req, res) => {
     try {
         fs.writeFileSync(path, JSON.stringify(jsonData))
         res.send({
-            message:"Add complete"
+            message: "Add complete"
         });
     } catch (error) {
         res.status(400).send({
@@ -49,11 +49,60 @@ const addItem = (req, res) => {
     }
 }
 
+const editNote = (req, res) => {
+    const id = req.params.id;
+    if (!readFile()) {
+        res.status(404).send({
+            err: "Lỗi không tim thay file"
+        })
+        return;
+    }
+    var dataJson = readFile();
+    var newValue, index;
+    dataJson.body.map((value, indexx) => {
+        if (value.id === parseInt(id)) {
+            newValue = {
+                ...value,
+                title: req.body.title,
+                conten: req.body.conten,
+            }
+            index = indexx
+        }
+    })
+    if (newValue) {
+        dataJson = {
+            body: [
+                ...dataJson.body.slice(0, index),
+                newValue,
+                ...dataJson.body.slice(index + 1)
+            ]
+        }
+        try {
+            fs.writeFileSync(path, JSON.stringify(dataJson))
+            res.send({
+                message: "Add complete"
+            });
+        } catch (error) {
+            res.status(400).send({
+                err: "err undifine"
+            })
+        }
+    }
+    else{
+        res.status(404).send({
+            message:"Không tìm thấy id: "+id
+        })
+    }
+
+
+}
+
 //da hoan thanh
 
 module.exports = {
     readFile,
-    addItem
+    addItem,
+    editNote
 }
 
 

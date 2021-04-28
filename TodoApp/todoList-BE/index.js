@@ -22,6 +22,10 @@ app.post('/conten', (req, res) => {
     handingjson.addItem(req, res);
 })
 
+app.get('/conten/:id', (req, res)=>{
+    handingjson.editNote(req, res);
+})
+
 app.listen('3000', () => {
     console.log('app listen port 3000');
 })
