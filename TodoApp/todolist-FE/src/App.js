@@ -33,7 +33,8 @@ class App extends Component {
             selectConten: {
                 title: '',
                 conten: ''
-            }
+            },
+            contenApi:[]
         }
 
         this.callonClick = createRef();
@@ -50,8 +51,8 @@ class App extends Component {
                 conten: conten.conten
             }
         })
-        var  a = this.state
-        
+        var a = this.state
+
     }
 
     onClickItem() {
@@ -66,7 +67,20 @@ class App extends Component {
             clickBtn: value
         })
     }
+
+    componentWillMount() {
+        fetch(`${process.env.REACT_APP_API_URL}/conten`)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    contenApi:json.body
+                })
+            });
+            console.log(3);
+    }
     render() {
+        console.log(4)
+        console.log(this.state)
         return (
             <>
                 <Head />
@@ -82,7 +96,7 @@ class App extends Component {
                                 this.selectConten
                             }
                             onClick={this.onClickItem}
-
+                            conten={this.state.contenApi}
                         />
 
                     </Trail>}
