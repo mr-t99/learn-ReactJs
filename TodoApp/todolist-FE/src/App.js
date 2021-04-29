@@ -34,7 +34,7 @@ class App extends Component {
                 title: '',
                 conten: ''
             },
-            contenApi:[]
+            contenApi: []
         }
 
         this.callonClick = createRef();
@@ -73,14 +73,11 @@ class App extends Component {
             .then(res => res.json())
             .then(json => {
                 this.setState({
-                    contenApi:json.body
+                    contenApi: json.body
                 })
             });
-            console.log(3);
     }
     render() {
-        console.log(4)
-        console.log(this.state)
         return (
             <>
                 <Head />
@@ -96,9 +93,8 @@ class App extends Component {
                                 this.selectConten
                             }
                             onClick={this.onClickItem}
-                            conten={this.state.contenApi}
+                            contenData={this.state.contenApi}
                         />
-
                     </Trail>}
                 {!this.state.clickBtn &&
                     <Trail open={true}>

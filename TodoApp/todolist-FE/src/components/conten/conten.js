@@ -27,31 +27,24 @@ const Item = (props) => {
 class conten extends Component {
     constructor() {
         super();
-        this.state = {
-            conten: []
-        }
         this.pushConten = this.pushConten.bind(this);
+        console.log(1)
     }
 
     pushConten(conten) {
         this.props.selectConten(conten)
     }
-    componentDidMount() {
-        console.log(2);
-        // this.setState({
-        //     conten: this.props.conten
-        // })
+    componentWillMount(){
     }
     render() {
-        console.log(1);
-        const { conten } = this.state;
+        const { contenData } = this.props;
         return (
             <div className='conten'>
                 {
-                    !conten.length && <div>No conten</div>
+                    contenData.length===0 && <div className='noItem'>Không có ghi chú</div>
                 }
                 {
-                    conten.length && conten.map((item, index) => {
+                    contenData.length!=0 && contenData.map((item, index) => {
                         return (
                             <Item
                                 title={item.title}
