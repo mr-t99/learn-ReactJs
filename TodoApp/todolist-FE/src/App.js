@@ -1,4 +1,4 @@
-import React, { Component, createRef, useState } from 'react';
+import React, { Component, createRef } from 'react';
 import { useTrail, a } from '@react-spring/web'
 import Head from './components/app-head/head';
 import Plusbtn from './components/btn/plus';
@@ -29,45 +29,50 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            clickBtn: true,
+            statusBtn: 'addBtn',
             selectConten: {
                 title: '',
                 conten: ''
             },
             contenApi: []
         }
+        this.onChangeBtn = createRef();
 
-        this.callonClick = createRef();
         this.selectConten = this.selectConten.bind(this);
         this.onClickItem = this.onClickItem.bind(this);
-        this.onClickBtn = this.onClickBtn.bind(this);
+        this.setStatusBtn = this.setStatusBtn.bind(this);
+
+        this.onChangeTextFormConten = this.onChangeTextFormConten.bind(this);
     }
 
     selectConten(conten) {
         this.setState({
-            ...this.state,
             selectConten: {
                 title: conten.title,
                 conten: conten.conten
-            }
+            },
+            statusBtn: 'backBtn'
         })
-        var a = this.state
-
     }
 
+    setStatusBtn(value) {
+        console.log("asdsdsa");
+        this.setState({
+            statusBtn: value
+        })
+    }
+    onChangeTextFormConten() {
+        this.setState({
+            statusBtn: "saveBtn"
+        })
+        this.onChangeBtn.current.onchangBtn('saveBtn');
+    }
     onClickItem() {
         this.setState({
-            clickBtn: this.callonClick.current.onClickItem()
+            statusBtn: "backBtn"
         })
+        this.onChangeBtn.current.onchangBtn('backBtn');
     }
-
-    onClickBtn(value) {
-        this.setState({
-            ...this.state,
-            clickBtn: value
-        })
-    }
-
     componentWillMount() {
         fetch(`${process.env.REACT_APP_API_URL}/conten`)
             .then(res => res.json())
@@ -75,8 +80,11 @@ class App extends Component {
                 this.setState({
                     contenApi: json.body
                 })
+                console.log(json);
             });
     }
+
+
     render() {
         return (
             <>
@@ -84,9 +92,11 @@ class App extends Component {
                 <Plusbtn
                     onClick={this.onClick}
                     exitBtn={this.onClickBtn}
-                    ref={this.callonClick}
+                    ref={this.onChangeBtn}
+                    statusBtn={this.state.statusBtn}
+                    setStatusBtn={this.setStatusBtn}
                 />
-                {this.state.clickBtn &&
+                {this.state.statusBtn === 'addBtn' &&
                     <Trail open={true}>
                         <Conten
                             selectConten={
@@ -96,10 +106,11 @@ class App extends Component {
                             contenData={this.state.contenApi}
                         />
                     </Trail>}
-                {!this.state.clickBtn &&
+                {(this.state.statusBtn === 'backBtn' || this.state.statusBtn === 'saveBtn') &&
                     <Trail open={true}>
                         <Fromconten
                             conten={this.state.selectConten}
+                            onChange={this.onChangeTextFormConten}
                         />
                     </Trail>
                 }

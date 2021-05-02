@@ -2,27 +2,59 @@ import React, { Component } from 'react';
 
 import './plus.css';
 
+const statusBtn = [
+    'addBtn', 'backBtn', 'saveBtn'
+]
+
 class plus extends Component {
     constructor() {
         super();
-        this.state = {
-            click: false
-        }
-        this.onClickItem = this.onClickItem.bind(this);
+
         this.onClick = this.onClick.bind(this);
     }
-    onClickItem() {
-        this.setState({
-            click: !this.state.click
-        })
-        return this.state.click
-    }
     
-    onClick(){
+
+    onClick() {
+        if(this.state.statusBtn===statusBtn[0]){
+            this.props.setStatusBtn(statusBtn[1]);
+            this.setState({
+                statusBtn: statusBtn[1]
+            })
+        }
+        if(this.state.statusBtn===statusBtn[1]){
+            this.props.setStatusBtn(statusBtn[0]);
+            this.setState({
+                statusBtn: statusBtn[0]
+            })
+        }
+    }
+
+    componentWillMount() {
         this.setState({
-            click: !this.state.click
+            statusBtn: this.props.statusBtn
         })
-        this.props.exitBtn(this.state.click);
+    }
+
+    renderImgBtn() {
+        var hrefImg;
+        if (this.state.statusBtn === 'addBtn') {
+            hrefImg = '/asset/plus.svg';
+        }
+        if (this.state.statusBtn === 'backBtn') {
+            hrefImg = '/asset/left-arrow.svg';
+        }
+        if (this.state.statusBtn === 'saveBtn') {
+            hrefImg = '/asset/tick.svg';
+        }
+        return (
+            <img src={hrefImg} width='25' alt='img1' />
+        )
+    }
+
+    onchangBtn(value){
+        this.setState({
+            statusBtn:value
+        })
     }
 
     render() {
@@ -31,8 +63,9 @@ class plus extends Component {
                 onClick={this.onClick}
             >
                 <div className='plusImg'>
-                    {!this.state.click && <img src='/asset/plus.svg' width='25' />}
-                    {this.state.click && <img src='/asset/left-arrow.svg' width='25' />}
+                    {
+                        this.renderImgBtn()
+                    }
                 </div>
             </div>
         );

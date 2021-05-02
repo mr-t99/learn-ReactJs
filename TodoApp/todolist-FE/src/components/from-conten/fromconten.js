@@ -1,10 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState } from 'react';
 import './from.css';
 import classNames from 'classnames';
 
 function Title(props) {
     var isFocus = false;
-    if (props.title != '') {
+    if (props.title !== '') {
         isFocus = true
     }
     const [state, setState] = useState({
@@ -45,6 +45,7 @@ function Title(props) {
                 value={state.value}
             ></input>
             <span data-placeholder2="Note title" data-placeholder1="Click here to add a title"></span>
+            
         </div>
     )
 }
@@ -67,6 +68,7 @@ class fromconten extends Component {
         this.setState({
             value:event.target.value
         })
+        this.props.onChange()
     }
     render() {
         return (
@@ -77,8 +79,7 @@ class fromconten extends Component {
                     onChange={
                         this.onChange
                     }
-                >
-                    {/* {this.props.conten} */}
+                >      
                 </textarea>
             </div>
         );

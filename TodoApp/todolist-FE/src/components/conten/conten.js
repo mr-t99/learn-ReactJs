@@ -28,13 +28,10 @@ class conten extends Component {
     constructor() {
         super();
         this.pushConten = this.pushConten.bind(this);
-        console.log(1)
     }
 
     pushConten(conten) {
         this.props.selectConten(conten)
-    }
-    componentWillMount(){
     }
     render() {
         const { contenData } = this.props;
@@ -44,7 +41,7 @@ class conten extends Component {
                     contenData.length===0 && <div className='noItem'>Không có ghi chú</div>
                 }
                 {
-                    contenData.length!=0 && contenData.map((item, index) => {
+                    contenData.length!==0 && contenData.map((item, index) => {
                         return (
                             <Item
                                 title={item.title}
