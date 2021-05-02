@@ -12,20 +12,29 @@ class plus extends Component {
 
         this.onClick = this.onClick.bind(this);
     }
-    
+
 
     onClick() {
-        if(this.state.statusBtn===statusBtn[0]){
+        if (this.state.statusBtn === statusBtn[0]) {
             this.props.setStatusBtn(statusBtn[1]);
             this.setState({
                 statusBtn: statusBtn[1]
             })
         }
-        if(this.state.statusBtn===statusBtn[1]){
+        if (this.state.statusBtn === statusBtn[1]) {
             this.props.setStatusBtn(statusBtn[0]);
             this.setState({
                 statusBtn: statusBtn[0]
             })
+        }
+        if (this.state.statusBtn === statusBtn[2]) {
+            //xử lý phím tick
+            this.props.onAddItem()
+            this.props.setStatusBtn(statusBtn[0]);
+            this.setState({
+                statusBtn: statusBtn[0]
+            })
+
         }
     }
 
@@ -51,9 +60,9 @@ class plus extends Component {
         )
     }
 
-    onchangBtn(value){
+    onchangBtn(value) {
         this.setState({
-            statusBtn:value
+            statusBtn: value
         })
     }
 

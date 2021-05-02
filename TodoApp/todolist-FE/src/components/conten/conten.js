@@ -42,6 +42,7 @@ class conten extends Component {
                 }
                 {
                     contenData.length!==0 && contenData.map((item, index) => {
+                        console.log(item);
                         return (
                             <Item
                                 title={item.title}

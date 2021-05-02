@@ -32,8 +32,15 @@ function Title(props) {
                     value: ''
                 })
                 return;
+            } else {
+                setState({
+                    value: event.target.value,
+                    isFocus:true
+                })
+                props.getValueTitle(state.value);
             }
         }
+        
     };
     return (
         <div className="input">
@@ -45,41 +52,53 @@ function Title(props) {
                 value={state.value}
             ></input>
             <span data-placeholder2="Note title" data-placeholder1="Click here to add a title"></span>
-            
+
         </div>
     )
 }
 
 
 class fromconten extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
-            value:''
+        this.state = {
+            title: '',
+            conten: ''
         }
+        this.getValueTitle = this.getValueTitle.bind(this);
         this.onChange = this.onChange.bind(this);
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
-            value:this.props.conten.conten
+            title: this.props.conten.title,
+            conten: this.props.conten.conten
         })
     }
-    onChange(event){
+    onChange(event) {
         this.setState({
-            value:event.target.value
+            conten: event.target.value
         })
         this.props.onChange()
+    }
+
+    getValueTitle(value) {
+        this.setState({
+            title: value
+        })
+    }
+    getAllValueFrom(){
+        return this.state;
     }
     render() {
         return (
             <div className="edit_item">
-                <Title title={this.props.conten.title} />
+                <Title title={this.state.title} getValueTitle={this.getValueTitle} />
                 <textarea placeholder="Write the conten here!"
                     value={this.state.value}
                     onChange={
                         this.onChange
                     }
-                >      
+                >
                 </textarea>
             </div>
         );

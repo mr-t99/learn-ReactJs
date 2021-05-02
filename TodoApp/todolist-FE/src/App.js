@@ -31,18 +31,20 @@ class App extends Component {
         this.state = {
             statusBtn: 'addBtn',
             selectConten: {
+                id:'',
                 title: '',
                 conten: ''
             },
             contenApi: []
         }
         this.onChangeBtn = createRef();
+        this.getValue = createRef();
 
         this.selectConten = this.selectConten.bind(this);
         this.onClickItem = this.onClickItem.bind(this);
         this.setStatusBtn = this.setStatusBtn.bind(this);
-
         this.onChangeTextFormConten = this.onChangeTextFormConten.bind(this);
+        this.onAddItem = this.onAddItem.bind(this);
     }
 
     selectConten(conten) {
@@ -56,7 +58,6 @@ class App extends Component {
     }
 
     setStatusBtn(value) {
-        console.log("asdsdsa");
         this.setState({
             statusBtn: value
         })
@@ -73,6 +74,19 @@ class App extends Component {
         })
         this.onChangeBtn.current.onchangBtn('backBtn');
     }
+    onAddItem(){
+        //get data from conten
+         this.setState({
+             contenApi:[
+                 ...this.state.contenApi.slice(),
+                 {
+                     title:this.getValue.current.getAllValueFrom().title,
+                     conten:this.getValue.current.getAllValueFrom().conten
+                 }
+             ]
+         })
+        console.log(this.getValue.current.getAllValueFrom());
+    }
     componentWillMount() {
         fetch(`${process.env.REACT_APP_API_URL}/conten`)
             .then(res => res.json())
@@ -80,7 +94,6 @@ class App extends Component {
                 this.setState({
                     contenApi: json.body
                 })
-                console.log(json);
             });
     }
 
@@ -95,6 +108,7 @@ class App extends Component {
                     ref={this.onChangeBtn}
                     statusBtn={this.state.statusBtn}
                     setStatusBtn={this.setStatusBtn}
+                    onAddItem = {this.onAddItem}
                 />
                 {this.state.statusBtn === 'addBtn' &&
                     <Trail open={true}>
@@ -111,6 +125,7 @@ class App extends Component {
                         <Fromconten
                             conten={this.state.selectConten}
                             onChange={this.onChangeTextFormConten}
+                            ref={this.getValue}
                         />
                     </Trail>
                 }
