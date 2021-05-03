@@ -31,7 +31,7 @@ class App extends Component {
         this.state = {
             statusBtn: 'addBtn',
             selectConten: {
-                id:'',
+                id: '',
                 title: '',
                 conten: ''
             },
@@ -59,33 +59,52 @@ class App extends Component {
 
     setStatusBtn(value) {
         this.setState({
-            statusBtn: value
+            statusBtn: value,
+            selectConten: {
+                id: '',
+                title: '',
+                conten: ''
+            }
         })
     }
+
     onChangeTextFormConten() {
         this.setState({
             statusBtn: "saveBtn"
         })
         this.onChangeBtn.current.onchangBtn('saveBtn');
     }
+
     onClickItem() {
         this.setState({
             statusBtn: "backBtn"
         })
         this.onChangeBtn.current.onchangBtn('backBtn');
     }
-    onAddItem(){
+    onAddItem() {
         //get data from conten
-         this.setState({
-             contenApi:[
-                 ...this.state.contenApi.slice(),
-                 {
-                     title:this.getValue.current.getAllValueFrom().title,
-                     conten:this.getValue.current.getAllValueFrom().conten
-                 }
-             ]
-         })
-        console.log(this.getValue.current.getAllValueFrom());
+        this.setState({
+            contenApi: [
+                ...this.state.contenApi.slice(),
+                {
+                    title: this.getValue.current.getAllValueFrom().title,
+                    conten: this.getValue.current.getAllValueFrom().conten
+                }
+            ]
+        })
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: this.getValue.current.getAllValueFrom().title,
+                conten: this.getValue.current.getAllValueFrom().conten
+            })
+        };
+        fetch(`${process.env.REACT_APP_API_URL}/conten`, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ postId: data.id })
+            }).catch(err => alert(err))
     }
     componentWillMount() {
         fetch(`${process.env.REACT_APP_API_URL}/conten`)
@@ -97,8 +116,11 @@ class App extends Component {
             });
     }
 
+    componentDidUpdate() {
+    }
 
     render() {
+
         return (
             <>
                 <Head />
@@ -108,7 +130,7 @@ class App extends Component {
                     ref={this.onChangeBtn}
                     statusBtn={this.state.statusBtn}
                     setStatusBtn={this.setStatusBtn}
-                    onAddItem = {this.onAddItem}
+                    onAddItem={this.onAddItem}
                 />
                 {this.state.statusBtn === 'addBtn' &&
                     <Trail open={true}>

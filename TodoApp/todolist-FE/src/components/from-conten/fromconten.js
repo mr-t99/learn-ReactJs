@@ -8,7 +8,7 @@ function Title(props) {
         isFocus = true
     }
     const [state, setState] = useState({
-        value: props.title,
+        value: props.value,
         isFocus: isFocus
     })
     const getValue = (event) => {
@@ -92,9 +92,9 @@ class fromconten extends Component {
     render() {
         return (
             <div className="edit_item">
-                <Title title={this.state.title} getValueTitle={this.getValueTitle} />
+                <Title value={this.props.conten.title} getValueTitle={this.getValueTitle}/>
                 <textarea placeholder="Write the conten here!"
-                    value={this.state.value}
+                    value={this.state.conten}
                     onChange={
                         this.onChange
                     }
