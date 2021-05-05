@@ -62,6 +62,7 @@ class fromconten extends Component {
     constructor() {
         super();
         this.state = {
+            id:'',
             title: '',
             conten: ''
         }
@@ -70,6 +71,7 @@ class fromconten extends Component {
     }
     componentDidMount() {
         this.setState({
+            id:this.props.conten.id,
             title: this.props.conten.title,
             conten: this.props.conten.conten
         })

@@ -38,13 +38,14 @@ class conten extends Component {
         return (
             <div className='conten'>
                 {
-                    contenData.length===0 && <div className='noItem'>Không có ghi chú</div>
+                    contenData.length === 0 && <div className='noItem'>Không có ghi chú</div>
                 }
                 {
-                    contenData.length!==0 && contenData.map((item, index) => {
-                        
+                    contenData.length !== 0 && contenData.map((item, index) => {
+
                         return (
                             <Item
+                                id={item.id}
                                 title={item.title}
                                 conten={item.conten}
                                 key={index}

@@ -50,6 +50,7 @@ class App extends Component {
     selectConten(conten) {
         this.setState({
             selectConten: {
+                id: conten.id,
                 title: conten.title,
                 conten: conten.conten
             },
@@ -83,29 +84,36 @@ class App extends Component {
     }
     onAddItem() {
         //get data from conten
-        this.setState({
-            contenApi: [
-                ...this.state.contenApi.slice(),
-                {
-                    title: this.getValue.current.getAllValueFrom().title,
-                    conten: this.getValue.current.getAllValueFrom().conten
-                }
-            ]
-        })
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: this.getValue.current.getAllValueFrom().title,
-                conten: this.getValue.current.getAllValueFrom().conten
+        if (typeof (this.getValue.current.getAllValueFrom().id) === 'number') {
+            console.log("day la so");
+        } else {
+            this.setState({
+                contenApi: [
+                    ...this.state.contenApi.slice(),
+                    {
+                        title: this.getValue.current.getAllValueFrom().title,
+                        conten: this.getValue.current.getAllValueFrom().conten
+                    }
+                ]
             })
-        };
-        fetch(`${process.env.REACT_APP_API_URL}/conten`, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ postId: data.id })
-            }).catch(err => alert(err))
+        }
+
+        // //post data
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         title: this.getValue.current.getAllValueFrom().title,
+        //         conten: this.getValue.current.getAllValueFrom().conten
+        //     })
+        // };
+        // fetch(`${process.env.REACT_APP_API_URL}/conten`, requestOptions)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         this.setState({ postId: data.id })
+        //     }).catch(err => alert(err))
     }
+
     componentWillMount() {
         fetch(`${process.env.REACT_APP_API_URL}/conten`)
             .then(res => res.json())
@@ -120,7 +128,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
             <>
                 <Head />
