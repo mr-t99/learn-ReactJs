@@ -22,7 +22,7 @@ app.post('/conten', (req, res) => {
     handingjson.addItem(req, res);
 })
 
-app.get('/conten/:id', (req, res)=>{
+app.post('/conten/:id', (req, res)=>{
     handingjson.editNote(req, res);
 })
 

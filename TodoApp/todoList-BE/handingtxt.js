@@ -51,6 +51,7 @@ const addItem = (req, res) => {
 
 const editNote = (req, res) => {
     const id = req.params.id;
+    console.log(id)
     if (!readFile()) {
         res.status(404).send({
             err: "Lỗi không tim thay file"
