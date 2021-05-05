@@ -85,7 +85,21 @@ class App extends Component {
     onAddItem() {
         //get data from conten
         if (typeof (this.getValue.current.getAllValueFrom().id) === 'number') {
-            console.log("day la so");
+            var data= this.state.contenApi;
+            const check = (value)=> value.id ===this.getValue.current.getAllValueFrom().id;
+            const locationArr = data.findIndex(check);
+
+            this.setState({
+                contenApi: [
+                    ...this.state.contenApi.slice(0, locationArr),
+                    {
+                        id:this.getValue.current.getAllValueFrom().id,
+                        title: this.getValue.current.getAllValueFrom().title,
+                        conten: this.getValue.current.getAllValueFrom().conten
+                    },
+                    ...this.state.contenApi.slice(locationArr+1),
+                ]
+            })
         } else {
             this.setState({
                 contenApi: [
@@ -98,20 +112,20 @@ class App extends Component {
             })
         }
 
-        // //post data
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         title: this.getValue.current.getAllValueFrom().title,
-        //         conten: this.getValue.current.getAllValueFrom().conten
-        //     })
-        // };
-        // fetch(`${process.env.REACT_APP_API_URL}/conten`, requestOptions)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         this.setState({ postId: data.id })
-        //     }).catch(err => alert(err))
+        //post data
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: this.getValue.current.getAllValueFrom().title,
+                conten: this.getValue.current.getAllValueFrom().conten
+            })
+        };
+        fetch(`${process.env.REACT_APP_API_URL}/conten`, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ postId: data.id })
+            }).catch(err => alert(err))
     }
 
     componentWillMount() {
