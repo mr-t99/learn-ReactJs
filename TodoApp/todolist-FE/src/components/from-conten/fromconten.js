@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 function Title(props) {
     var isFocus = false;
-    if (props.title !== '') {
+    console.log(props)
+    if (props.value !== '') {
         isFocus = true
     }
     const [state, setState] = useState({
