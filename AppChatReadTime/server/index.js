@@ -15,6 +15,7 @@ const io = require('socket.io')(server, {
 io.on('connection', (client) => {
     console.log('Client connected...');
     client.on('test', data=>{
+        client.emit('newMessage', 'Tao la server guiwr cho m client');
         console.log(data);
     })
 });

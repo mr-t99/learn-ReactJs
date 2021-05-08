@@ -11,12 +11,24 @@ class App extends Component {
     }
     this.socket =null;
     this.sendMessage = this.sendMessage.bind(this);
+    // this.newMessage = this.newMessage.bind(this);
   }
   componentWillMount(){
     // this.socket = io('http://192.168.1.6:3000');
     this.socket = io('http://localhost:3000');
+    this.socket.on('newMessage', (res)=>{
+      this.newMessage(res)
+    })
   }
-
+  newMessage(res){
+    console.log(res);
+    var a = this.state.message;
+    a.push(res);
+    console.log(a);
+    this.setState({
+      message:a
+    })
+  }
   sendMessage(){
     this.socket.emit("test", 'Tao vua gui cho m mot cai gi do');
   }
