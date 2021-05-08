@@ -1,18 +1,22 @@
 var express = require('express');
+var cors = require('cors')
+
 var app = express();
-
-var server = require('http').createServer(app);
-
-const io = require('socket.io')(server)
-
-app.get('/', (req, res, ext)=> {
-    res.sendFile(__dirname+'/public/index.html')
-});
-
+app.use(cors())
 app.use(express.static('public'));
 
-io.on('connection', (client)=> {
+var server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: '*',
+    }
+})
+
+io.on('connection', (client) => {
     console.log('Client connected...');
+    client.on('test', data=>{
+        console.log(data);
+    })
 });
 
 server.listen('3000', () => {

@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './app.css';
+import io from 'socket.io-client';
+class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      message:[
+        'hello'
+      ]
+    }
+    this.socket =null;
+    this.sendMessage = this.sendMessage.bind(this);
+  }
+  componentWillMount(){
+    // this.socket = io('http://192.168.1.6:3000');
+    this.socket = io('http://localhost:3000');
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  sendMessage(){
+    this.socket.emit("test", 'Tao vua gui cho m mot cai gi do');
+  }
+  render() {
+    console.log(this.socket)
+    return (
+      <div className='app'>
+        <input></input>
+        <button onClick={this.sendMessage}>Nhaap</button>
+        {this.state.message.map(elment=>{
+          return(
+            <li key={Math.random}>
+              {elment}
+            </li>
+          )
+        })}
+      </div>
+    );
+  }
 }
 
 export default App;
