@@ -21,16 +21,14 @@ class App extends Component {
     })
   }
   newMessage(res){
-    console.log(res);
     var a = this.state.message;
     a.push(res);
-    console.log(a);
     this.setState({
       message:a
     })
   }
   sendMessage(){
-    this.socket.emit("test", 'Tao vua gui cho m mot cai gi do');
+    this.socket.emit("test123345", 'Tao vua gui cho m mot cai gi do');
   }
   render() {
     console.log(this.socket)
